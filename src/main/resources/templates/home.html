@@ -1,0 +1,41 @@
+<div th:replace="fragments/navigationBar :: navbar"></div>
+<link rel="stylesheet" type="text/css" th:href="@{/css/uploadImages.css}" />
+
+<div class="mainContainer" th:if="${userRole == 'Administrator'}">
+    <form method="POST" th:action="@{/saveContent?type=home}" th:object="${content}" enctype="multipart/form-data">
+        <input type="hidden" id="id" name="id" th:field="*{id}">
+        <div class="form-group">
+            <span style="color:red">* </span>
+            <label for="header">Header:</label>
+            <textarea class="form-control" id="header" th:field="*{header}" name="header"></textarea>
+        </div>
+        <div class="form-group">
+            <span style="color:red">* </span>
+            <label for="ourStory">Our Story:</label>
+            <textarea class="form-control" id="details" th:field="*{details}" name="details"></textarea>
+        </div>
+        <div class="row">
+            <div class="col-sm-6 col-md-6 col-lg-6">
+                <h4><span style="color:red">* </span>Background Picture:</h4>
+                <div class="uploader imageDisplay" onclick="$('#picture1').click()">
+                    <i id="uploadIcon" class="fa fa-upload" aria-hidden="true"></i>
+                    <div id="imageMsg" style="margin-left: 69px;font-weight:bold;">Select an image or drag here</div>
+                    <input type="file" th:field="*{picture1}" name="picture1" id="picture1" />
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-6 col-lg-6 imageDivDisplay">
+                <img class="imageDisplay image1" th:src="*{image1}" />
+            </div>
+        </div>
+        <br>
+        <button type="submit" class="btn btn-primary">Save</button>
+    </form>
+    <script type="text/javascript" th:src="@{/js/uploadImages.js}"></script>
+    <script type="text/javascript" th:src="@{/js/richText.js}"></script>
+</div>
+
+<!-- Content Dispal -->
+<div class="viewContainer">
+	<div th:utext="${content.header}"></div>
+	<div style="margin-top:50%" th:utext="${content.details}"></div>
+</div>

@@ -1,0 +1,47 @@
+<div th:replace="fragments/navigationBar :: navbar"></div>
+<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap.min.js"></script>
+   
+<body>
+<div class="mainContainer">
+    <div class="row">
+        <div style="float: left; margin-left: 15px;">
+            <h3>Users<a th:href="@{/addUser}"><span class="glyphicon glyphicon-plus-sign" id="usersAddIcon"> </span></a></h3>
+        </div>
+    </div>
+    <div class="container-fluid table-responsive">
+        <br>
+        <table class="table table-striped table-hover" id="usersTable">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>No Of Guests</th>
+                    <th>Address</th>
+                    <th>Contact</th>
+                    <th>RSVP Sent On</th>
+                    <th>RSVP Updated On</th>
+                    <th>RSVP Updated By</th>
+                    <th>Role</th>
+                </tr>
+            </thead>
+            <tbody>
+                  <tr th:each="user : ${users}">
+	                  <td>
+	                  		<a th:href="@{/editUser?id={id}(id=${user.id})}" target='_blank' class="editLinksColor" th:text="${user.firstName}+' '+${user.lastName}"></a>
+	                  </td>
+	                  <td th:text="${user.email}"></td>
+	                  <td th:text="${user.plus}"></td>
+	                  <td th:text="${user.address}"></td>
+	                  <td th:text="${user.contactType}+'-'+${user.contact}"></td>
+	                  <td th:text="${#temporals.format(user.rsvpSentOn, 'MM/dd/yyyy')}"></td>
+	                  <td th:text="${#temporals.format(user.rsvpUpdatedOn, 'MM/dd/yyyy')}"></td>
+	                  <td th:text="${user.rsvpUpdatedBy}"></td>
+	                  <td th:text="${user.role}"></td>
+                  </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+<script type="text/javascript" th:src="@{/js/users.js}"></script>

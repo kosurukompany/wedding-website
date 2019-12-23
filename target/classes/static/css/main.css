@@ -1,0 +1,37 @@
+.mainContainer{
+	border-top: solid lightgrey 1px ;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    padding:15px 15px 15px 15px;
+    margin:2%;
+    background: azure;
+}
+
+#message{
+	text-align:center;
+}
+
+.contentImageDisplay{
+	
+	width:100%;
+}
+
+.viewContainer{
+	margin:2%;
+}
+#usersTable_filter,#usersTable_paginate{
+	float:right;
+}
+#usersAddIcon{
+	margin-left: 5px;
+    top: 5px;
+    color: darkgreen;
+}
+
+.form-signin {
+    background-color:white;
+    padding:2%;
+    border: 1px solid rgba(0,0,0,0.1);
+    position:absolute;
+    margin: 5% 5% 5% 0%;
+    width: 25%;
+}

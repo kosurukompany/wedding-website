@@ -1,0 +1,66 @@
+<link rel="stylesheet" type="text/css" th:href="@{/css/adminRegistration.css}" />
+
+<body>
+    <div th:replace="fragments/imports :: imports"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-offset-3 col-sm-offset-3 col-md-offset-3 col-lg-offset-3 col-xl-offset-3">
+                <form autocomplete="off" action="#" th:action="@{/adminRegistration}" th:object="${user}" method="post" class="form-registarion" role="form">
+
+                    <h2 style="text-align:center">Satya & Chelsea Account</h2>
+
+                    <div class="row">
+                        <div class="col-sm-12 col-md-12 col-lg-12">
+                            <span style="color:red">* </span>
+                            <label for="registartionFname" class="text-muted">First Name:</label>
+                            <label th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}" class="validation-message text-muted"></label>
+                            <input type="text" th:field="*{firstName}" placeholder="first Name" class="form-control" required/>
+                        </div>
+                    </div>
+
+                    <br>
+                    <div class="row">
+                        <div class="col-sm-12 col-md-12 col-lg-12">
+                            <span style="color:red">* </span>
+                            <label for="registartionLname" class="text-muted">Last Name:</label>
+                            <label th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}" class="validation-message text-muted"></label>
+                            <input type="text" th:field="*{lastName}" placeholder="Last Name" class="form-control" required/>
+                        </div>
+                    </div>
+
+                    <br>
+                    <div class="row">
+                        <div class="col-sm-12 col-md-12 col-lg-12">
+                            <span style="color:red">* </span>
+                            <label for="registartionEmail" class="text-muted">Email:</label>
+                            <input type="email" th:field="*{email}" placeholder="Email" class="form-control" required/>
+                            <label th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="validation-message"></label>
+                        </div>
+                    </div>
+
+                    <br>
+                    <div class="row">
+                        <div class="col-sm-12 col-md-12 col-lg-12">
+                            <span style="color:red">* </span>
+                            <label for="registartionPassword" class="text-muted">Password:</label>
+                            <input type="password" th:field="*{password}" placeholder="Password" class="form-control" required/>
+                            <label th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="validation-message"></label>
+                        </div>
+                    </div>
+
+                    <br>
+                    <div class="row">
+                        <div class="col-sm-12 col-md-12 col-lg-12">
+                            <button type="submit" class="btn btn-primary btn-block">Create Satya & Chelsea Account</button>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+
+</body>
+<div th:replace="fragments/footer :: footer"></div>
+
+</html>
