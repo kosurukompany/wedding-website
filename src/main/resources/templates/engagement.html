@@ -1,0 +1,60 @@
+<div th:replace="fragments/navigationBar :: navbar"></div>
+<link rel="stylesheet" type="text/css" th:href="@{/css/imagesGrid.css}" />
+<script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
+
+<div class="mainContainer" th:if="${userRole == 'Administrator'}">
+    <form method="POST" th:action="@{/saveContent?type=engagement}" th:object="${content}">
+        <input type="hidden" id="id" name="id" th:field="*{id}">
+        <div class="form-group">
+            <span style="color:red">* </span>
+            <label for="details">Story:</label>
+            <textarea class="form-control" id="Details" th:field="*{details}" name="details" required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Save</button>
+    </form>
+    <script type="text/javascript" th:src="@{/js/richText.js}"></script>
+    <h3>Upload Engagement Pictures:</h3>
+    <form method="POST" action="/photosUpload" enctype="multipart/form-data">
+
+        <div class="form-group fileupload">
+            <div class="input-group input-file">
+                <span class="input-group-btn">
+        		<button class="btn btn-default btn-choose" type="button">Choose</button>
+    		</span>
+                <input type="text" class="form-control" placeholder='Choose a file...' />
+                <span class="input-group-btn">
+       			 <button class="btn btn-warning btn-reset" type="button">Reset</button>
+    		</span>
+                <span class="input-group-btn fileUploadSubmitButton"><button type="submit" class="btn btn-primary pull-right">Submit</button>
+    		</span>
+            </div>
+        </div>
+    </form>
+</div>
+
+<!-- Content Dispal -->
+<div class="viewContainer">
+    <div th:utext="${content.details}"></div>
+    <div class="grid photoGrid">
+        <div class="grid-item" th:each="pictures: ${pictures}">
+            <img class="img-responsive hover-shadow cursor" th:src="${pictures.url}" th:onclick="'openModal();currentSlide('+${picturesStat.index}+');'" />
+        </div>
+    </div>
+    <div id="myModal" class="modal">
+        <span class="close cursor" onclick="closeModal()">&times;</span>
+        <div class="modal-content">
+
+            <div class="mySlides" th:each="pictures: ${pictures}">
+                <img th:src="${pictures.url}" style="width:100%" />
+            </div>
+
+            <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+            <a class="next" onclick="plusSlides(1)">&#10095;</a>
+
+            <div class="caption-container">
+                <p id="caption"></p>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" th:src="@{/js/imagesGrid.js}"></script>

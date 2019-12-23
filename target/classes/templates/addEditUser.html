@@ -1,0 +1,76 @@
+<div th:replace="fragments/navigationBar :: navbar"></div>
+
+<body>
+<div class="mainContainer">
+    <h2 th:text="${type}"></h2>
+    <form th:action="@{/saveUser}" id="userForm" method="POST" th:object="${user}" class="form-signin">
+        <input type="hidden" id="id" name="id" th:field="*{id}">
+        <div class="row">
+            <label for="firstNameLabel" class="col-sm-1 col-md-1 col-lg-1 control-label">First Name<span style="color:red">*</span>:</label>
+            <div class="col-sm-3 col-md-3 col-lg-3">
+                <input type="text" class="form-control" th:field="*{firstName}" id="firstName" name="firstName" required>
+            </div>
+            <label for="lastNameLabel" class="col-sm-1 col-md-1 col-lg-1 control-label">Last Name<span style="color:red">*</span>:</label>
+            <div class="col-sm-3 col-md-3 col-lg-3">
+                <input type="text" class="form-control" th:field="*{lastName}" id="lastName" name="lastName" required>
+            </div>
+            <label for="lastNameLabel" class="col-sm-1 col-md-1 col-lg-1 control-label">Contact:</label>
+            <div class="col-sm-1 col-md-1 col-lg-1">
+                <select class="form-control" id="contactType" name="contactType">
+                	<option value="Mobile" th:selected="('Mobile' == *{contact})">Mobile</option>
+                    <option value="Home" th:selected="('Home' == *{contact})">Home</option>
+                </select>
+            </div>
+            <div class="col-sm-2 col-md-2 col-lg-2">
+                <input type="text" class="form-control" th:field="*{contact}" id="contact" name="contact">
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <label for="emailLabel" class="col-sm-1 col-md-1 col-lg-1 control-label">Email<span style="color:red">*</span>:</label>
+            <div class="col-sm-3 col-md-3 col-lg-3">
+                <input type="text" class="form-control" th:field="*{email}" id="email" name="email" required>
+            </div>
+            <label for="tenantLabel" class="col-sm-1 col-md-1 col-lg-1 control-label">Role<span style="color:red">*</span>:</label>
+            <div class="col-sm-3 col-md-3 col-lg-3">
+                <select class="form-control" id="role" name="role" required>
+                	<option value="User" th:selected="('User' == *{role})">User</option>
+                    <option value="Administrator" th:selected="('Administrator' == *{role})">Administrator</option>
+                </select>
+            </div>
+            <div class="row">
+	            <label for="activeLabel" class="col-sm-1 col-md-1 col-lg-1 control-label" style="width: 10%;"><span th:text="*{id == null ? 'Send RSVP':'RSVP Sent'}">:</span><br>Family:</label>
+	            <div class="col-sm-1 col-md-1 col-lg-1" style="width: 6%;">
+	                <input type="checkbox" id="sendRsvp"  name="sendRsvp" th:checked="*{sendRsvp}" th:disabled="*{id != null}">
+	                <br>
+	                <input type="checkbox" id="family" name="family" th:checked="*{family}">
+	            </div>
+	            <label for="family" class="col-sm-1 col-md-1 col-lg-1 control-label" style="width: 6%;">Plus<span style="color:red">*</span>:</label>
+	            <div class="col-sm-1 col-md-1 col-lg-1" style="width: 10%;">
+	                <input type="number" class="form-control" id="plus" th:value="*{plus}" name="plus" required>
+	            </div>
+	        </div>
+        </div>
+        <br>
+        <div class="row" th:if="*{id != null}">
+            <label for="emailLabel" class="col-sm-1 col-md-1 col-lg-1 control-label">Family Details:</label>
+            <div class="col-sm-3 col-md-3 col-lg-3">
+            </div>
+        </div>
+        <br>
+        <div>
+            <button type="submit" class="btn btn-primary" id="saveButton">Save</button>
+            <button type="reset" class="btn btn-warning" id="resetButton" th:if="${user.id == null}">Reset</button>
+            <button type="button" id="editButton" th:onclick="'window.location.href = \'' + @{/sendRsvp(id=*{id})} + '\''" th:if="*{id != null}" class="btn btn-warning"><i class="fa fa-edit"></i>&nbsp;Send RSVP</button>
+            <button type="button" class="btn btn-danger" id="deleteButton" th:if="*{id != null}" th:data = "*{id} " onclick="deleteUser(this.getAttribute('data'))" >Delete</button>
+        </div>
+    </form>
+</div>
+</body>
+<script>
+function deleteUser(id){
+	if(confirm("Are you sure you want to delete the User?"+id)){
+		window.location.href = "/deleteUser?id="+id;
+	}
+}
+</script>

@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Implementation-Title: SatyaWedsChelsea
+Implementation-Version: 0.0.1-SNAPSHOT
+Built-By: Satya
+Implementation-Vendor-Id: com.kosuru.kompany
+Build-Jdk: 1.8.0_111
+Implementation-URL: https://projects.spring.io/spring-boot/#/spring-bo
+ ot-starter-parent/SatyaWedsChelsea
+Created-By: Maven Integration for Eclipse
+
